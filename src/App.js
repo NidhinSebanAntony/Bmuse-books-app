@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React,{ useState, useEffect } from 'react'
 import './App.css';
+import { RootContext } from './context/RootContext';
+import Home from './pages/Home';
+import { results } from "./books.json";
+
 
 function App() {
+  const [ selectedBook, setSelectedBook ] = useState(null)
+  
+  const [ booksArray, setBooksArray ] = useState([])
+
+  useEffect(()=>{
+      setBooksArray(results.books)        
+  },[])
+
+  const getSelectedBook = (book) => {
+    setSelectedBook(book)
+  }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RootContext.Provider 
+      value={{
+        selectedBook: selectedBook,
+        booksArray: booksArray,
+        getSelectedBook: getSelectedBook,
+      }}>
+      <Home />
+    </RootContext.Provider>
   );
 }
 
