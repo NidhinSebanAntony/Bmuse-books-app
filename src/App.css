@@ -220,6 +220,10 @@
   text-align: center;
 }
 
+.fav-btn:hover {
+  cursor: pointer;
+}
+
 .selected-book-desc {
   color: grey;
   width: 50vw;
